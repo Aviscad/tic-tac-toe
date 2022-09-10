@@ -1,0 +1,33 @@
+*,
+*::after,
+*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body{
+    box-sizing: inherit;
+}
+html{
+    font-size: 16px;
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+    gap: .5rem;
+    background-color: #000;
+    margin: .5rem;
+    user-select: none;
+    width: fit-content
+}
+.grid-item{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2rem;
+}
