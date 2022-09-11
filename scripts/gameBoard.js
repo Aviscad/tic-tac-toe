@@ -1,8 +1,8 @@
 export { gameBoard };
 const gameBoard = (() => {
   const board = ["", "", "", "", "", "", "", "", ""];
+  const gridContainer = document.querySelector(".grid");
   const drawGrid = () => {
-    let gridContainer = document.querySelector(".grid");
     for (let i = 0; i < board.length; i++) {
       let div = document.createElement("div");
       div.classList.add("grid-item");
@@ -81,5 +81,11 @@ const gameBoard = (() => {
       return false;
     }
   };
-  return { drawGrid, setMarker, checkWinner };
+  const resetBoard = () => {
+    for (let i = 0; i < board.length; i++) {
+      board[i] = "";
+    }
+    gridContainer.innerHTML = "";
+  };
+  return { drawGrid, setMarker, checkWinner, resetBoard };
 })();
