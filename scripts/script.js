@@ -18,6 +18,7 @@ window.onload = () => {
     const grid = document.querySelector(".grid");
     const btnReset = document.querySelector("#reset");
     const markerItem = document.querySelectorAll(".marker-item");
+    const cardsContainer = document.querySelector(".cards-container");
     const p1Name = document.querySelector("#p1-name");
     const p2Name = document.querySelector("#p2-name");
     let p1Marker = false;
@@ -45,6 +46,7 @@ window.onload = () => {
               p2Name.value != ""
             ) {
               grid.classList.toggle("hidden");
+              cardsContainer.classList.add("hidden");
             }
           }
         }
@@ -71,6 +73,7 @@ window.onload = () => {
               p2Name.value != ""
             ) {
               grid.classList.toggle("hidden");
+              cardsContainer.classList.add("hidden");
             }
           }
         }
@@ -81,9 +84,9 @@ window.onload = () => {
 
     const checkPlayerName = (marker) => {
       if (playerOne.getPlayerMarker() == marker) {
-        return playerOne.getPlayerName();
+        return playerOne;
       } else {
-        return playerTwo.getPlayerName();
+        return playerTwo;
       }
     };
 
@@ -103,7 +106,13 @@ window.onload = () => {
             }
             playerTurn = !playerTurn;
             if (gameBoard.checkWinner()) {
-              alert(checkPlayerName(lastMove));
+              alert(
+                "The winner is: " +
+                  checkPlayerName(lastMove).getPlayerName() +
+                  " : " +
+                  checkPlayerName(lastMove).getPlayerMarker()
+              );
+              btnReset.classList.remove("hidden");
               btnReset.onclick = () => {
                 gameBoard.resetBoard();
                 removeStyles();
@@ -119,6 +128,8 @@ window.onload = () => {
       p1Name.value = p2Name.value = "";
       p1Name.removeAttribute("disabled");
       p2Name.removeAttribute("disabled");
+      cardsContainer.classList.remove("hidden");
+      btnReset.classList.add("hidden");
       markerItem.forEach((element) => {
         element.classList.remove("selected-marker");
       });

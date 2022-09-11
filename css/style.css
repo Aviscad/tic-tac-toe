@@ -52,6 +52,7 @@ button:hover{
     padding: 1rem 2.5rem;
     background-color: var(--white);
     border-radius: 5px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     gap: .75rem;
@@ -92,6 +93,7 @@ button:hover{
 }
 .cards-container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: .5rem;
@@ -115,4 +117,21 @@ button:hover{
 }
 .error{
     border: 2px solid red;
+}
+
+@media only screen and (min-width: 600px){
+    .cards-container{
+        flex-direction: row;
+    }
+    .player-card{
+        width: 275px;
+    }
+    .grid{
+        width: 450px;
+    }
+    .grid-item{
+        width: 150px;
+        height: 150px;
+        font-size: 4rem;
+    }
 }
