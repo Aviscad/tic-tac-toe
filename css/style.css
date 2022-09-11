@@ -57,6 +57,7 @@ button:hover{
     flex-direction: column;
     gap: .75rem;
     box-shadow: -1px 1px 5px 0px rgba(0,0,0,0.6);
+    user-select: none;
 }
 .grid{
     display: grid;
@@ -110,6 +111,9 @@ button:hover{
 } 
 .selected-marker{
     background-color: black;
+}
+.already-selected{
+    filter: grayscale(100%) opacity(.5);
 }
 .hidden{
     opacity: 0;

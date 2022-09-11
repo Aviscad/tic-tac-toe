@@ -37,6 +37,7 @@ window.onload = () => {
             p1Name.classList.remove("error");
             p1Name.setAttribute("disabled", true);
             selectedMarker.classList.add("selected-marker");
+            selectedMarker.dataset.who = p1Name.value;
             playerOne = Player(p1Name.value, pOneSelectedMarker);
             p1Marker = !p1Marker;
             if (
@@ -56,7 +57,10 @@ window.onload = () => {
     for (let i = 4; i < markerItem.length; i++) {
       const selectedMarker = markerItem[i];
       selectedMarker.onclick = () => {
-        if (!p2Marker) {
+        if (
+          !p2Marker &&
+          playerOne.getPlayerMarker() != selectedMarker.textContent
+        ) {
           if (p2Name.value == "") {
             p2Name.classList.add("error");
           } else {
@@ -64,6 +68,7 @@ window.onload = () => {
             p2Name.classList.remove("error");
             p2Name.setAttribute("disabled", true);
             selectedMarker.classList.add("selected-marker");
+            selectedMarker.dataset.who = p2Name.value;
             playerTwo = Player(p2Name.value, pTwoSelectedMarker);
             p2Marker = !p2Marker;
             if (
@@ -76,6 +81,8 @@ window.onload = () => {
               cardsContainer.classList.add("hidden");
             }
           }
+        } else {
+          selectedMarker.classList.add("already-selected");
         }
       };
     }
@@ -118,6 +125,16 @@ window.onload = () => {
                 removeStyles();
                 gameFlow();
               };
+            } else {
+              let gridItemArray = Array.from(gridItem);
+              if (gridItemArray.every((element) => element.textContent != "")) {
+                btnReset.classList.remove("hidden");
+                btnReset.onclick = () => {
+                  gameBoard.resetBoard();
+                  removeStyles();
+                  gameFlow();
+                };
+              }
             }
           }
         }
@@ -132,6 +149,7 @@ window.onload = () => {
       btnReset.classList.add("hidden");
       markerItem.forEach((element) => {
         element.classList.remove("selected-marker");
+        element.classList.remove("already-selected");
       });
     };
   };
