@@ -11,29 +11,32 @@ const Player = (name, marker) => {
 };
 
 const gameFlow = () => {
+  //Drawwing Grid
   gameBoard.drawGrid();
+
+  //Variables
   const gridItem = document.querySelectorAll(".grid-item");
   const playerOne = Player("Jhon", "X");
   const playerComputer = Player("Computer", "O");
   let playerTurn = true;
 
-  gridItem.forEach((element) => {
-    element.onclick = () => {
-      if (element.textContent == "") {
-        if (playerTurn) {
-          element.textContent = playerOne.getPlayerMarker();
-          gameBoard.setMarker(
-            element.dataset.cell,
-            playerOne.getPlayerMarker()
-          );
-        } else {
-          element.textContent = playerComputer.getPlayerMarker();
-          gameBoard.setMarker(
-            element.dataset.cell,
-            playerComputer.getPlayerMarker()
-          );
+  gridItem.forEach((squareInGrid) => {
+    squareInGrid.onclick = () => {
+      if (gameBoard.checkWinner() == false) {
+        if (squareInGrid.textContent == "") {
+          let positionInGrid = squareInGrid.dataset.cell;
+          if (playerTurn) {
+            squareInGrid.textContent = playerOne.getPlayerMarker();
+            gameBoard.setMarker(positionInGrid, playerOne.getPlayerMarker());
+          } else {
+            squareInGrid.textContent = playerComputer.getPlayerMarker();
+            gameBoard.setMarker(
+              positionInGrid,
+              playerComputer.getPlayerMarker()
+            );
+          }
+          playerTurn = !playerTurn;
         }
-        playerTurn = !playerTurn;
       }
     };
   });
