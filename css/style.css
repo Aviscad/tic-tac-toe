@@ -55,6 +55,7 @@ button:hover{
     width: 300px;
     display: flex;
     flex-direction: column;
+    text-align: center;
     gap: .75rem;
     box-shadow: -1px 1px 5px 0px rgba(0,0,0,0.6);
     user-select: none;
@@ -83,7 +84,7 @@ button:hover{
 }
 .markers-container{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
 }
 .marker-item{

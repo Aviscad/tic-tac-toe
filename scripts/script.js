@@ -26,7 +26,10 @@ window.onload = () => {
     let playerOne = "";
     let playerTwo = "";
 
-    for (let i = 0; i < markerItem.length - 4; i++) {
+    console.log(markerItem);
+
+    //MARKERS FOR PLAYER#1
+    for (let i = 0; i < markerItem.length - 6; i++) {
       const selectedMarker = markerItem[i];
       selectedMarker.onclick = () => {
         if (!p1Marker) {
@@ -54,7 +57,8 @@ window.onload = () => {
       };
     }
 
-    for (let i = 4; i < markerItem.length; i++) {
+    //MARKERS FOT PLATER#2
+    for (let i = 6; i < markerItem.length; i++) {
       const selectedMarker = markerItem[i];
       selectedMarker.onclick = () => {
         if (
@@ -86,6 +90,7 @@ window.onload = () => {
         }
       };
     }
+
     let playerTurn = true;
     let lastMove = "";
 
