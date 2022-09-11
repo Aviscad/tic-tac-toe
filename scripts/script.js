@@ -10,15 +10,72 @@ window.onload = () => {
     };
     return { getPlayerName, getPlayerMarker };
   };
-
   const gameFlow = () => {
     gameBoard.drawGrid();
 
     //Variables
     const gridItem = document.querySelectorAll(".grid-item");
+    const grid = document.querySelector(".grid");
     const btnReset = document.querySelector("#reset");
-    const playerOne = Player("Jhon", "X");
-    const playerTwo = Player("Gabriel", "O");
+    const markerItem = document.querySelectorAll(".marker-item");
+    const p1Name = document.querySelector("#p1-name");
+    const p2Name = document.querySelector("#p2-name");
+    let p1Marker = false;
+    let p2Marker = false;
+    let playerOne = "";
+    let playerTwo = "";
+
+    for (let i = 0; i < markerItem.length - 4; i++) {
+      const selectedMarker = markerItem[i];
+      selectedMarker.onclick = () => {
+        if (!p1Marker) {
+          if (p1Name.value == "") {
+            p1Name.classList.add("error");
+          } else {
+            const pOneSelectedMarker = selectedMarker.textContent;
+            p1Name.classList.remove("error");
+            p1Name.setAttribute("disabled", true);
+            selectedMarker.classList.add("selected-marker");
+            playerOne = Player(p1Name.value, pOneSelectedMarker);
+            p1Marker = !p1Marker;
+            if (
+              playerOne != "" &&
+              playerTwo != "" &&
+              p1Name.value != "" &&
+              p2Name.value != ""
+            ) {
+              grid.classList.toggle("hidden");
+            }
+          }
+        }
+      };
+    }
+
+    for (let i = 4; i < markerItem.length; i++) {
+      const selectedMarker = markerItem[i];
+      selectedMarker.onclick = () => {
+        if (!p2Marker) {
+          if (p2Name.value == "") {
+            p2Name.classList.add("error");
+          } else {
+            const pTwoSelectedMarker = selectedMarker.textContent;
+            p2Name.classList.remove("error");
+            p2Name.setAttribute("disabled", true);
+            selectedMarker.classList.add("selected-marker");
+            playerTwo = Player(p2Name.value, pTwoSelectedMarker);
+            p2Marker = !p2Marker;
+            if (
+              playerOne != "" &&
+              playerTwo != "" &&
+              p1Name.value != "" &&
+              p2Name.value != ""
+            ) {
+              grid.classList.toggle("hidden");
+            }
+          }
+        }
+      };
+    }
     let playerTurn = true;
     let lastMove = "";
 
@@ -49,6 +106,7 @@ window.onload = () => {
               alert(checkPlayerName(lastMove));
               btnReset.onclick = () => {
                 gameBoard.resetBoard();
+                removeStyles();
                 gameFlow();
               };
             }
@@ -56,7 +114,15 @@ window.onload = () => {
         }
       };
     });
+    const removeStyles = () => {
+      grid.classList.toggle("hidden");
+      p1Name.value = p2Name.value = "";
+      p1Name.removeAttribute("disabled");
+      p2Name.removeAttribute("disabled");
+      markerItem.forEach((element) => {
+        element.classList.remove("selected-marker");
+      });
+    };
   };
-
   gameFlow();
 };

@@ -11,15 +11,77 @@
   <body>
     <header>
       <div class="action">
-        <button>text</button>
-        <button>text</button>
         <button id="reset">Reset</button>
       </div>
     </header>
 
+    <div class="cards-container">
+      <div class="player-card">
+        <h2>Player #1</h2>
+          <input type="text" name="player-name" id="p1-name" class="input-text" placeholder="Player Name">
+        <div>
+          <h3>Markers</h3>
+          <div class="markers-container">
+            <div class="marker-item">👻</div>
+            <div class="marker-item">👽</div>
+            <div class="marker-item">🤖</div>
+            <div class="marker-item">💀</div>
+          </div>
+        </div>
+      </div>
+      <div class="player-card">
+        <h2>Player #2</h2>
+          <input type="text" name="player-name" id="p2-name" class="input-text" placeholder="Player Name">
+        <div>
+          <h3>Markers</h3>
+          <div class="markers-container">
+            <div class="marker-item">🚀</div>
+            <div class="marker-item">☃️</div>
+            <div class="marker-item">✨</div>
+            <div class="marker-item">🎈</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
     <main>
-        <div class="grid"></div>
+      <!-- <div class="show-player hidden">
+        <div class="player-card">
+          <h2>Player #1</h2>
+            <input type="text" name="player-name" id="playerone-name" class="input-text" placeholder="Player Name">
+          <div>
+            <h3>Markers</h3>
+            <div class="markers-container">
+              <div class="marker-item">👻</div>
+              <div class="marker-item">👽</div>
+              <div class="marker-item">🤖</div>
+              <div class="marker-item">💀</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="show-player hidden">
+        <div class="player-card">
+          <h2>Player #2</h2>
+            <input type="text" name="player-name" id="playerone-name" class="input-text" placeholder="Player Name">
+          <div>
+            <h3>Markers</h3>
+            <div class="markers-container">
+              <div class="marker-item">👻</div>
+              <div class="marker-item">👽</div>
+              <div class="marker-item">🤖</div>
+              <div class="marker-item">💀</div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+
+        <div class="grid hidden"></div>
     </main>
+
+    
 
     <script src="./scripts/script.js" type="module"></script>
   </body>
