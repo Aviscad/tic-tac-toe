@@ -1,6 +1,17 @@
 import { gameBoard } from "./gameBoard.js";
 
 window.onload = () => {
+  const p1Name = document.querySelector("#p1-name");
+  const p2Name = document.querySelector("#p2-name");
+  const markerItem = document.querySelectorAll(".marker-item");
+  const grid = document.querySelector(".grid");
+  const cardsContainer = document.querySelector(".cards-container");
+  let p1Marker = false;
+  let p2Marker = false;
+  let playAgain = false;
+  let playerOne = "";
+  let playerTwo = "";
+
   const Player = (name, marker) => {
     const getPlayerName = () => {
       return name;
@@ -10,23 +21,9 @@ window.onload = () => {
     };
     return { getPlayerName, getPlayerMarker };
   };
-  const gameFlow = () => {
-    gameBoard.drawGrid();
 
-    //Variables
-    const gridItem = document.querySelectorAll(".grid-item");
-    const grid = document.querySelector(".grid");
-    const btnReset = document.querySelector("#reset");
-    const markerItem = document.querySelectorAll(".marker-item");
-    const cardsContainer = document.querySelector(".cards-container");
-    const p1Name = document.querySelector("#p1-name");
-    const p2Name = document.querySelector("#p2-name");
-    let p1Marker = false;
-    let p2Marker = false;
-    let playerOne = "";
-    let playerTwo = "";
-
-    //MARKERS FOR PLAYER#1
+  const setPlayers = () => {
+    //MARKERS FOT PLATER#1
     for (let i = 0; i < markerItem.length - 6; i++) {
       const selectedMarker = markerItem[i];
       selectedMarker.onclick = () => {
@@ -88,9 +85,21 @@ window.onload = () => {
         }
       };
     }
+  };
 
+  const gameFlow = () => {
+    gameBoard.drawGrid();
+
+    //Variables
+    const gridItem = document.querySelectorAll(".grid-item");
+    const btnReset = document.querySelector("#reset");
+    const btnPlayAgain = document.querySelector("#rematch");
     let playerTurn = true;
     let lastMove = "";
+
+    if (playAgain == false) {
+      setPlayers();
+    }
 
     const checkPlayerName = (marker) => {
       if (playerOne.getPlayerMarker() == marker) {
@@ -123,8 +132,16 @@ window.onload = () => {
                   checkPlayerName(lastMove).getPlayerMarker()
               );
               btnReset.classList.remove("hidden");
+              btnPlayAgain.classList.remove("hidden");
               btnReset.onclick = () => {
                 gameBoard.resetBoard();
+                playAgain = false;
+                removeStyles();
+                gameFlow();
+              };
+              btnPlayAgain.onclick = () => {
+                gameBoard.resetBoard();
+                playAgain = true;
                 removeStyles();
                 gameFlow();
               };
@@ -132,8 +149,16 @@ window.onload = () => {
               let gridItemArray = Array.from(gridItem);
               if (gridItemArray.every((element) => element.textContent != "")) {
                 btnReset.classList.remove("hidden");
+                btnPlayAgain.classList.remove("hidden");
                 btnReset.onclick = () => {
                   gameBoard.resetBoard();
+                  playAgain = false;
+                  removeStyles();
+                  gameFlow();
+                };
+                btnPlayAgain.onclick = () => {
+                  gameBoard.resetBoard();
+                  playAgain = true;
                   removeStyles();
                   gameFlow();
                 };
@@ -143,18 +168,33 @@ window.onload = () => {
         }
       };
     });
+
     const removeStyles = () => {
-      grid.classList.toggle("hidden");
-      p1Name.value = p2Name.value = "";
-      p1Name.removeAttribute("disabled");
-      p2Name.removeAttribute("disabled");
-      cardsContainer.classList.remove("hidden");
-      btnReset.classList.add("hidden");
-      markerItem.forEach((element) => {
-        element.classList.remove("selected-marker");
-        element.classList.remove("already-selected");
-      });
+      if (playAgain == true) {
+        btnReset.classList.add("hidden");
+        btnPlayAgain.classList.add("hidden");
+        markerItem.forEach((element) => {
+          element.classList.remove("selected-marker");
+          element.classList.remove("already-selected");
+        });
+      } else if (playAgain == false) {
+        playerOne = playerTwo = "";
+        p1Marker = p2Marker = false;
+
+        grid.classList.toggle("hidden");
+        p1Name.value = p2Name.value = "";
+        p1Name.removeAttribute("disabled");
+        p2Name.removeAttribute("disabled");
+        cardsContainer.classList.remove("hidden");
+        btnReset.classList.add("hidden");
+        btnPlayAgain.classList.add("hidden");
+        markerItem.forEach((element) => {
+          element.classList.remove("selected-marker");
+          element.classList.remove("already-selected");
+        });
+      }
     };
   };
+
   gameFlow();
 };
