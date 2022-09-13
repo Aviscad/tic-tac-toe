@@ -127,8 +127,7 @@ window.onload = () => {
             }
             playerTurn = !playerTurn;
             if (gameBoard.checkWinner()) {
-              winnerTitle.textContent = `
-              The winner is:
+              winnerTitle.textContent = `The winner is:
               ${checkPlayerName(lastMove).getPlayerName()}
               ${lastMove}`;
               winnerContainer.classList.toggle("hidden");
@@ -141,8 +140,14 @@ window.onload = () => {
             } else {
               let gridItemArray = Array.from(gridItem);
               if (gridItemArray.every((element) => element.textContent != "")) {
-                btnReset.onclick = checkResetType(false);
-                btnPlayAgain.onclick = checkResetType(true);
+                winnerTitle.textContent = "It's a Tie!";
+                winnerContainer.classList.toggle("hidden");
+                btnReset.onclick = () => {
+                  checkResetType(false);
+                };
+                btnPlayAgain.onclick = () => {
+                  checkResetType(true);
+                };
               }
             }
           }
