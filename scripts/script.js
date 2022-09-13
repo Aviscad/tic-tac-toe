@@ -26,8 +26,6 @@ window.onload = () => {
     let playerOne = "";
     let playerTwo = "";
 
-    console.log(markerItem);
-
     //MARKERS FOR PLAYER#1
     for (let i = 0; i < markerItem.length - 6; i++) {
       const selectedMarker = markerItem[i];

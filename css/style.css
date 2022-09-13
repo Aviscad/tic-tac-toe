@@ -9,7 +9,6 @@
 :root{
     --black: #000;
     --white: #fff;
-    --main-color: #88ef46;
 }
 html, body{
     box-sizing: inherit;
@@ -28,11 +27,25 @@ main{
     justify-content: center;
     align-items: center;
 }
+footer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    width: 100%;
+    font-size: .95em;
+    text-align: center;
+    position: relative;
+    margin-top: 1rem;
+    bottom: 0;
+}
 header{
     padding: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 button,
 input[type="submit"]{
@@ -46,7 +59,14 @@ input[type="submit"]{
     border: 2px solid var(--black);
 }
 button:hover{
-    border: 2px solid rgb(26, 255, 0);
+   color: var(--white);
+   background-color: var(--black);
+}
+.action{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
 }
 .player-card{
     padding: 1rem 2.5rem;
