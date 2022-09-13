@@ -58,6 +58,9 @@ input[type="submit"]{
     color: #000;
     border: 2px solid var(--black);
 }
+input[type="text"]{
+    text-align: center;
+}
 button:hover{
    color: var(--white);
    background-color: var(--black);
@@ -68,7 +71,8 @@ button:hover{
     justify-content: center;
     gap: .5rem;
 }
-.player-card{
+.player-card,
+.winner-card{
     padding: 1rem 2.5rem;
     background-color: var(--white);
     border-radius: 5px;
@@ -101,6 +105,10 @@ button:hover{
     align-items: center;
     font-weight: bold;
     font-size: 2rem;
+    cursor: pointer;
+}
+.grid-item:hover{
+    background-color: antiquewhite;
 }
 .markers-container{
     display: grid;
@@ -139,9 +147,28 @@ button:hover{
 .hidden{
     opacity: 0;
     display: none;
+    pointer-events: none;
 }
 .error{
     border: 2px solid red;
+}
+.winner-container{
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity .5s ease-in-out;
+}
+.winner-card_title{
+    font-size: 1.9rem;
+}
+.won{
+    background-color: red;
 }
 
 @media only screen and (min-width: 600px){
@@ -158,5 +185,13 @@ button:hover{
         width: 150px;
         height: 150px;
         font-size: 4rem;
+    }
+    .winner-card{
+        width: 450px;
+        height: 200px;
+        justify-content: center;
+    }
+    .winner-card_title{
+        font-size: 2.5rem;
     }
 }

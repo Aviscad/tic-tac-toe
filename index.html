@@ -12,15 +12,11 @@
   <body>
     <header>
       <h1>Tic-Tac-Toe</h1>
-      <div class="action">
-        <button id="reset" class="hidden">Reset</button>
-        <button id="rematch" class="hidden">Play Again</button>
-      </div>
     </header>
     <div class="cards-container">
       <div class="player-card">
         <h2>Player #1</h2>
-          <input type="text" name="player-name" id="p1-name" class="input-text" placeholder="Player Name">
+          <input type="text" name="player-name" id="p1-name" class="input-text" placeholder="Player Name" maxlength="15">
         <div>
           <h3>Markers</h3>
           <div class="markers-container">
@@ -35,7 +31,7 @@
       </div>
       <div class="player-card">
         <h2>Player #2</h2>
-          <input type="text" name="player-name" id="p2-name" class="input-text" placeholder="Player Name">
+          <input type="text" name="player-name" id="p2-name" class="input-text" placeholder="Player Name" maxlength="15">
         <div>
           <h3>Markers</h3>
           <div class="markers-container">
@@ -48,11 +44,21 @@
           </div>
         </div>
       </div>
-
     </div>
+
     <main>
         <div class="grid hidden"></div>
     </main>
+
+    <div class="winner-container hidden">
+      <div class="winner-card">
+        <h1 class="winner-card_title">The Winner is: name</h1>
+        <div class="winner-card_actions">
+          <button id="reset">Restart</button>
+          <button id="rematch">Play Again?</button>
+        </div>
+      </div>
+    </div>
 
     <footer>
       <p>Made by <a href="https://github.com/Aviscad" target="_blank">@Aviscad - <i class="fa fa-github"></i></a></p>

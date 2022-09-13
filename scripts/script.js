@@ -92,6 +92,8 @@ window.onload = () => {
 
     //Variables
     const gridItem = document.querySelectorAll(".grid-item");
+    const winnerContainer = document.querySelector(".winner-container");
+    const winnerTitle = document.querySelector(".winner-card_title");
     const btnReset = document.querySelector("#reset");
     const btnPlayAgain = document.querySelector("#rematch");
     let playerTurn = true;
@@ -125,43 +127,22 @@ window.onload = () => {
             }
             playerTurn = !playerTurn;
             if (gameBoard.checkWinner()) {
-              alert(
-                "The winner is: " +
-                  checkPlayerName(lastMove).getPlayerName() +
-                  " : " +
-                  checkPlayerName(lastMove).getPlayerMarker()
-              );
-              btnReset.classList.remove("hidden");
-              btnPlayAgain.classList.remove("hidden");
+              winnerTitle.textContent = `
+              The winner is:
+              ${checkPlayerName(lastMove).getPlayerName()}
+              ${lastMove}`;
+              winnerContainer.classList.toggle("hidden");
               btnReset.onclick = () => {
-                gameBoard.resetBoard();
-                playAgain = false;
-                removeStyles();
-                gameFlow();
+                checkResetType(false);
               };
               btnPlayAgain.onclick = () => {
-                gameBoard.resetBoard();
-                playAgain = true;
-                removeStyles();
-                gameFlow();
+                checkResetType(true);
               };
             } else {
               let gridItemArray = Array.from(gridItem);
               if (gridItemArray.every((element) => element.textContent != "")) {
-                btnReset.classList.remove("hidden");
-                btnPlayAgain.classList.remove("hidden");
-                btnReset.onclick = () => {
-                  gameBoard.resetBoard();
-                  playAgain = false;
-                  removeStyles();
-                  gameFlow();
-                };
-                btnPlayAgain.onclick = () => {
-                  gameBoard.resetBoard();
-                  playAgain = true;
-                  removeStyles();
-                  gameFlow();
-                };
+                btnReset.onclick = checkResetType(false);
+                btnPlayAgain.onclick = checkResetType(true);
               }
             }
           }
@@ -169,10 +150,25 @@ window.onload = () => {
       };
     });
 
+    const checkResetType = (halfReset) => {
+      if (halfReset) {
+        gameBoard.resetBoard();
+        playAgain = halfReset;
+        removeStyles();
+        gameFlow();
+      } else {
+        gameBoard.resetBoard();
+        playAgain = halfReset;
+        removeStyles();
+        gameFlow();
+      }
+      winnerContainer.classList.toggle("hidden");
+    };
+
     const removeStyles = () => {
       if (playAgain == true) {
-        btnReset.classList.add("hidden");
-        btnPlayAgain.classList.add("hidden");
+        // btnReset.classList.add("hidden");
+        // btnPlayAgain.classList.add("hidden");
         markerItem.forEach((element) => {
           element.classList.remove("selected-marker");
           element.classList.remove("already-selected");
@@ -186,8 +182,8 @@ window.onload = () => {
         p1Name.removeAttribute("disabled");
         p2Name.removeAttribute("disabled");
         cardsContainer.classList.remove("hidden");
-        btnReset.classList.add("hidden");
-        btnPlayAgain.classList.add("hidden");
+        // btnReset.classList.add("hidden");
+        // btnPlayAgain.classList.add("hidden");
         markerItem.forEach((element) => {
           element.classList.remove("selected-marker");
           element.classList.remove("already-selected");
